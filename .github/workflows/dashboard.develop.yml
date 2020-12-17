@@ -24,7 +24,17 @@ jobs:
       
   sonar:
     runs-on: ubuntu-20.04
+    needs: [build]
     steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
     - name: Execute Sonar scan
       uses: Secbyte/dotnet-sonarscanner@v2.3
       with:
