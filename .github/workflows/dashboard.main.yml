@@ -30,11 +30,11 @@ jobs:
       with:
         buildCommand: dotnet build .
         testCommand: dotnet test -l:trx;LogFileName=TestOutput.xml
-         projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
-         projectName: ${{ secrets.SONAR_PROJECT_NAME }}
-         beginArguments: >
+        projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
+        projectName: ${{ secrets.SONAR_PROJECT_NAME }}
+        beginArguments: >
           /d:sonar.verbose="true"
-          /d:sonar.cs.opencover.reportsPaths='"/dashboard/dashboardTests/TestResults/TestOutput.xml",""/dashboard/TestResults/TestOutput.xml""'
+          /d:sonar.cs.opencover.reportsPaths='"/dashboardTests/TestResults/TestOutput.xml",""/TestResults/TestOutput.xml""'
           /d:sonar.coverage.exclusions='"**/*.cs","**/*.md"'
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
