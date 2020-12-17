@@ -32,6 +32,7 @@ jobs:
         testCommand: dotnet test -l:trx;LogFileName=TestOutput.xml
         projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
         projectName: ${{ secrets.SONAR_PROJECT_NAME }}
+        sonarHostname: ${{ secrets.SONAR_HOSTNAME }}
         beginArguments: >
           /d:sonar.verbose="true"
           /d:sonar.cs.opencover.reportsPaths='"/dashboardTests/TestResults/TestOutput.xml",""/TestResults/TestOutput.xml""'
