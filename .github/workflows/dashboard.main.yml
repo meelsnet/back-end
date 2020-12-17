@@ -1,0 +1,60 @@
+name: Build, Test, Scan and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+  sonar:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Execute Sonar scan
+      uses: Secbyte/dotnet-sonarscanner@v2.3
+      with:
+        buildCommand: dotnet build .
+        testCommand: dotnet test -l:trx;LogFileName=TestOutput.xml
+         projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
+         projectName: ${{ secrets.SONAR_PROJECT_NAME }}
+         beginArguments: >
+          /d:sonar.verbose="true"
+          /d:sonar.cs.opencover.reportsPaths='"/dashboard/dashboardTests/TestResults/TestOutput.xml",""/dashboard/TestResults/TestOutput.xml""'
+          /d:sonar.coverage.exclusions='"**/*.cs","**/*.md"'
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docker:
+    name: Publish - Docker Hub
+    runs-on: ubuntu-20.04
+    needs: [build, sonar]
+    env:
+      REPO: ${{ secrets.DOCKER_REPOSITORY }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Docker image
+      run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
+    - name: Publish Docker image
+      run: docker push $REPO
