@@ -43,8 +43,7 @@ jobs:
         sonarProjectName: ${{ secrets.SONAR_PROJECT_NAME }}
         sonarHostname: ${{ secrets.SONAR_HOSTNAME }}
         sonarBeginArguments: >
-          /d:sonar.verbose="true"
-          /d:sonar.cs.opencover.reportsPaths='"/dashboardTests/TestResults/TestOutput.xml",""/TestResults/TestOutput.xml""'
+          /d:sonar.cs.opencover.reportsPaths='"/dashboardTests/TestResults/TestOutput.xml"'
           /d:sonar.coverage.exclusions='"**/*.cs","**/*.md"'
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
