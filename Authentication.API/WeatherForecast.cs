@@ -1,6 +1,6 @@
 using System;
 
-namespace dashboard
+namespace Authentication.API
 {
     public class WeatherForecast
     {
