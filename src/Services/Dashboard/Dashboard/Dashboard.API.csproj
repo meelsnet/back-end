@@ -4,7 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>4a5fdf28-bf8b-40cd-8ac7-fcf929d1ae90</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <CodeAnalysisRuleSet>..\..\..\..\.sonarlint\dashboard_back-endcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\..\..\.sonarlint\dashboard_back-end\CSharp\SonarLint.xml" Link="SonarLint.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
