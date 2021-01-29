@@ -12,7 +12,7 @@ namespace Authentication.API.Services
 {
     public class UserService : IUserService
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public UserService(DataContext context)
         {
@@ -53,8 +53,7 @@ namespace Authentication.API.Services
             if (_context.Users.Any(x => x.Username == user.Username))
                 throw new AppException("Username \"" + user.Username + "\" is already taken");
 
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
@@ -88,8 +87,7 @@ namespace Authentication.API.Services
 
             if (!string.IsNullOrWhiteSpace(password))
             {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
@@ -112,22 +110,20 @@ namespace Authentication.API.Services
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null)
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
 
             if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+                throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
 
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
+            using var hmac = new HMACSHA512();
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         }
 
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null)
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
 
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\..\.sonarlint\dashboard_back-endcsharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\..\.sonarlint\dashboard_back-end\CSharp\SonarLint.xml" Link="SonarLint.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ApiEndpoints\Dashboard.Api.TheMovieDb\Dashboard.Api.TheMovieDb.csproj" />
+    <ProjectReference Include="..\..\Services\Dashboard\Dashboard.Core\Dashboard.Core.csproj" />
+    <ProjectReference Include="..\..\Services\Dashboard\Dashboard.Helpers\Dashboard.Helpers.csproj" />
+    <ProjectReference Include="..\..\Services\Dashboard\Dashboard.Settings\Dashboard.Settings.csproj" />
+  </ItemGroup>
+
+</Project>
