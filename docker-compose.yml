@@ -7,9 +7,9 @@ services:
       context: .
       dockerfile: src/Services/Authentication/Authentication.API/Dockerfile
 
-  dashboard.api:
-    image: ${DOCKER_REGISTRY-}dashboardapi
+  media.api:
+    image: ${DOCKER_REGISTRY-}mediaapi
     build:
       context: .
-      dockerfile: src/Services/Dashboard/Dashboard/Dockerfile
+      dockerfile: src/Services/Media/Media.API/Dockerfile
 
