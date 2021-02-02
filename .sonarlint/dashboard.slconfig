@@ -1,0 +1,12 @@
+{
+  "ServerUri": "https://sonarqube.meelsnet.nl/",
+  "Organization": null,
+  "ProjectKey": "dashboard:back-end",
+  "ProjectName": "Dashboard",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AXWjwU6guVuZO4WXvon6",
+      "ProfileTimestamp": "2020-11-07T17:29:16Z"
+    }
+  }
+}

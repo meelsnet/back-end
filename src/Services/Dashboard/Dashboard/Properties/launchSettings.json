@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:27380",
-      "sslPort": 44336
+      "applicationUrl": "http://localhost:21873",
+      "sslPort": 44382
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Authentication.API": {
+    "Dashboard": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
