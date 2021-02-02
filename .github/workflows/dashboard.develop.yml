@@ -16,11 +16,11 @@ jobs:
       with:
         dotnet-version: 5.0.101
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore dashboard.sln
     - name: Build
       run: dotnet build dashboard.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test dashboard.sln --no-build --verbosity normal
       
   sonar:
     runs-on: ubuntu-20.04
@@ -32,7 +32,7 @@ jobs:
       with:
         dotnet-version: 5.0.101
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore dashboard.sln
     - name: Build
       run: dotnet build dashboard.sln --no-restore
     - name: Execute Sonar scan
