@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  authentication.api:
+    image: ${DOCKER_REGISTRY-}authenticationapi
+    build:
+      context: .
+      dockerfile: src/Services/Authentication/Authentication.API/Dockerfile
+
+  dashboard.api:
+    image: ${DOCKER_REGISTRY-}dashboardapi
+    build:
+      context: .
+      dockerfile: src/Services/Dashboard/Dashboard/Dockerfile
+
