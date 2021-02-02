@@ -20,8 +20,8 @@ namespace Authentication.API.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private IUserService _userService;
-        private IMapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UserController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings)

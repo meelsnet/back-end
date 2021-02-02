@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{7493604C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Media.API", "src\Services\Media\Media.API\Media.API.csproj", "{4E835B6D-8110-48D0-A0BE-6F3338A14E63}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CAD9B6E0-7D77-4CB2-96D9-93CA7658ABEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4E835B6D-8110-48D0-A0BE-6F3338A14E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E835B6D-8110-48D0-A0BE-6F3338A14E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E835B6D-8110-48D0-A0BE-6F3338A14E63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD9B6E0-7D77-4CB2-96D9-93CA7658ABEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD9B6E0-7D77-4CB2-96D9-93CA7658ABEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD9B6E0-7D77-4CB2-96D9-93CA7658ABEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD9B6E0-7D77-4CB2-96D9-93CA7658ABEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

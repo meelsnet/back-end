@@ -126,13 +126,13 @@ namespace Authentication.API.Services
                 throw new ArgumentNullException(nameof(password));
 
             if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+                throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
 
             if (storedHash.Length != 64)
-                throw new ArgumentException("Invalid length of password hash (64 byte expected).", "storedHash");
+                throw new ArgumentException("Invalid length of password hash (64 byte expected).", nameof(storedHash));
 
             if (storedSalt.Length != 128)
-                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "storedSalt");
+                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", nameof(storedSalt));
 
             using (var hmac = new HMACSHA512(storedSalt))
             {

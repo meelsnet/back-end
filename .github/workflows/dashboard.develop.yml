@@ -18,7 +18,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build dashboard.sln --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
       
@@ -34,7 +34,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build dashboard.sln --no-restore
     - name: Execute Sonar scan
       uses: highbyte/sonarscan-dotnet@2.0
       with:

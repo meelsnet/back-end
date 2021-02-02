@@ -8,13 +8,11 @@ namespace Media.API.Services
 {
     public class TvService : ITvService
     {
-        private readonly IConfiguration _config;
         private readonly TMDbClient _client;
 
         public TvService(IConfiguration config)
         {
-            _config = config;
-            _client = new TMDbClient(_config.GetValue<string>("TmdbApi:ApiKey"));
+            _client = new TMDbClient(config.GetValue<string>("TmdbApi:ApiKey"));
         }
         
         public SearchContainer<SearchTv> SearchTv(string searchTerm)
