@@ -2,13 +2,13 @@ version: '3.4'
 
 services:
   authentication.api:
-    image: ${DOCKER_REGISTRY-}authenticationapi
+    image: authentication.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: src/Services/Authentication/Authentication.API/Dockerfile
 
   media.api:
-    image: ${DOCKER_REGISTRY-}mediaapi
+    image: media.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: src/Services/Media/Media.API/Dockerfile
