@@ -39,7 +39,7 @@ jobs:
       uses: highbyte/sonarscan-dotnet@2.0
       with:
         dotnetTestArguments: dotnet test dashboard.sln -l:trx;LogFileName=TestOutput.xml
-        dotnetBuildArguments: dotnet build dashboard.sln
+        dotnetBuildArguments: dashboard.sln
         sonarProjectKey: ${{ secrets.SONAR_PROJECT_KEY }}
         sonarProjectName: ${{ secrets.SONAR_PROJECT_NAME }}
         sonarHostname: ${{ secrets.SONAR_HOSTNAME }}
