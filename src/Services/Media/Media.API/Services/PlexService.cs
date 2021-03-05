@@ -24,66 +24,11 @@ namespace Media.API.Services
             _mapper = mapper;
         }
 
-        public async Task<SessionModel> GetActiveSession(string authKey, string plexServerHost, string playerMachineId)
-        {
-            List<Session> sessions = await _plexClient.GetSessions(authKey, plexServerHost);
-            if (sessions == null || sessions.Count == 0)
-            {
-                return null;
-            }
-
-            return _mapper.Map<SessionModel>(sessions.FirstOrDefault(c =>
-                    c.Player.MachineIdentifier == playerMachineId));
-        }
-
         public async Task<List<Server>> GetServers(string authKey)
         {
             List<Server> servers = await _plexClient.GetServers(authKey);
 
             return servers;
-        }
-
-        public async Task<List<Directory>> GetLibraries(string authKey, string plexServerHost)
-        {
-            var container = await _plexClient.GetLibraries(authKey, plexServerHost);
-
-            return container?.MediaContainer?.Directory;
-        }
-
-        public async Task<MediaContainer> GetLibrary(string authKey, string plexServerHost, string libraryKey)
-        {
-            var container = await _plexClient.GetLibrary(authKey, plexServerHost, libraryKey);
-
-            return container?.MediaContainer;
-        }
-
-        public async Task<List<Metadata>> GetLibraryItems(string authKey, string plexServerHost, string libraryKey)
-        {
-            var container = await _plexClient.GetMetadataForLibrary(authKey, plexServerHost, libraryKey);
-
-            return container?.MediaContainer?.Metadata;
-        }
-
-        public async Task<List<Metadata>> GetRandomMovies(string authKey, string plexServerHost, string[] libraryKeys, int numberOfMovies = 1)
-        {
-            PlexMediaContainer libraries = await _plexClient.GetLibraries(authKey, plexServerHost);
-
-            var directories = libraries.MediaContainer.Directory.
-                Where(c => libraryKeys.Contains(c.Key, StringComparer.OrdinalIgnoreCase));
-
-            List<Metadata> movies = new List<Metadata>();
-            foreach (var directory in directories)
-            {
-                var items = await _plexClient.GetLibrary(authKey, plexServerHost, directory.Key);
-                movies.AddRange(items.MediaContainer.Metadata);
-            }
-
-            Random rnd = new Random();
-            var randomMovies = movies.OrderBy(x => rnd.Next())
-                .Take(numberOfMovies)
-                .ToList();
-
-            return randomMovies;
         }
 
         public async Task<List<Session>> GetActiveSessions(string authKey, string plexServerHost)
