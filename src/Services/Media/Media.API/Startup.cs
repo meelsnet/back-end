@@ -14,6 +14,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Media.API.Services;
+using Plex.Api;
+using Plex.Api.Api;
 using TMDbLib.Objects.Movies;
 
 namespace Media.API
@@ -30,9 +32,24 @@ namespace Media.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Create Client Options
+            var clientOptions = new ClientOptions
+            {
+                DeviceName = "Media.Api",
+                ClientId = "44db8d19-8eac-4631-9ec4-9fb42e03e361"
+            };
+
+            services.AddLogging();
             services.AddSingleton<IMoviesService, MoviesService>();
             services.AddSingleton<ITvService, TvService>();
+            services.AddSingleton<IApiService, ApiService>();
 
+            services.AddTransient<IPlexClient, PlexClient>();
+            services.AddTransient<IPlexService, PlexService>();
+            services.AddTransient<IPlexRequestsHttpClient, PlexRequestsHttpClient>();
+            services.AddSingleton<ClientOptions>(clientOptions);
+
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -45,6 +62,8 @@ namespace Media.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
