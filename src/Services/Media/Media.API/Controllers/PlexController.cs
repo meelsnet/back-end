@@ -19,9 +19,13 @@ namespace Media.API.Services
             _plexService = plexService;
         }
 
-
+        /// <summary>
+        /// Authenticate via Plex account
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Plex account info</returns>
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] AuthenticationModel model)
+        public async Task<IActionResult> Authenticate(AuthenticationModel model)
         {
             if (string.IsNullOrEmpty(model.Username))
                 return BadRequest(new { message = "Username is missing" });
@@ -32,6 +36,11 @@ namespace Media.API.Services
             return Ok(user);
         }
 
+        /// <summary>
+        /// Find registered servers on plex account
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>List of registered plex servers</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetServers([FromQuery] AuthKeyPlexModel model)
         {
@@ -43,6 +52,13 @@ namespace Media.API.Services
             return Ok(servers);
         }
 
+        /// <summary>
+        /// Get active sessions
+        /// </summary>
+        /// <param name="authKey">Plex account authentication token</param>
+        /// <param name="plexServerUrl">Plex servers fullUri</param>
+        /// <param name="playerMachineId">Plex servers machineIdentifier</param>
+        /// <returns>List of active sessions on specified plex server</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetSessions([Required] string authKey, [Required] string plexServerUrl, string playerMachineId)
         {
