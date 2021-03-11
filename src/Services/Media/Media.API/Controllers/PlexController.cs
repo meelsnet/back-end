@@ -56,8 +56,8 @@ namespace Media.API.Services
         /// Get active sessions
         /// </summary>
         /// <param name="authKey">Plex account authentication token</param>
-        /// <param name="plexServerUrl">Plex servers fullUri</param>
-        /// <param name="playerMachineId">Plex servers machineIdentifier</param>
+        /// <param name="plexServerUrl">Plex server fullUri</param>
+        /// <param name="playerMachineId">Plex server machineIdentifier</param>
         /// <returns>List of active sessions on specified plex server</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetSessions([Required] string authKey, [Required] string plexServerUrl, string playerMachineId)
