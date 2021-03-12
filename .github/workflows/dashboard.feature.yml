@@ -22,16 +22,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore dependencies 🛠
-        run: dotnet restore
+        run: dotnet restore dashboard.sln
 
       - name: Build app 🚀
-        run: dotnet build -c Release --no-restore
+        run: dotnet build dashboard.sln -c Release --no-restore
 
       - name: Run automated tests 🧪
-        run: dotnet text -c Release --no-build
+        run: dotnet test dashboard.sln -c Release --no-build
 
       - name: Publish app 📰
-        run: dotnet publish -c Release -o ./out
+        run: dotnet publish dashboard.sln -c Release -o ./out
 
       - name: Static code analysis 👁
         uses: kitabisa/sonarqube-action@master
